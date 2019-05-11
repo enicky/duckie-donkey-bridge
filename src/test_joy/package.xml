@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>joy_cli</name>
-  <version>0.0.1</version>
-  <description>The joy_cli package</description>
+  <name>test_joy</name>
+  <version>0.0.0</version>
+  <description>The test_joy package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="alpetrov@student.ethz.ch">Aleksandar Petrov</maintainer>
+  <maintainer email="enicky@todo.todo">enicky</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/joy-cli</url> -->
+  <!-- <url type="website">http://wiki.ros.org/test_joy</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -50,14 +50,14 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>duckietown_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
   <build_depend>rospy</build_depend>
-  <build_depend>Adafruit_PCA9685</build_depend>
   <build_export_depend>duckietown_msgs</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
-  <build_export_depend>Adafruit_PCA9685</build_export_depend>
+  <build_export_depend>sensor_msgs</build_export_depend>
   <exec_depend>duckietown_msgs</exec_depend>
   <exec_depend>rospy</exec_depend>
-  <exec_depend>Adafruit_PCA9685</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
