@@ -11,6 +11,8 @@ import cv2
 from scipy.misc import imresize
 from skimage import color
 
+from cv_bridge import CvBridge, CvBrigeError
+
 VERBOSE = True
 
 

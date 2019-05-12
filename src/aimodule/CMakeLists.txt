@@ -10,8 +10,10 @@ project(aimodule)
 find_package(catkin REQUIRED COMPONENTS
   duckietown_msgs
   rospy
+  geometry_msgs
   std_msgs
 )
+find_package(OpenCV 3 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -119,6 +121,7 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+   include_directories(${OpenCV_INCLUDE_DIRS})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -149,6 +152,7 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+  # target_link_libraries( ${OpenCV_LIBRARIES})
 
 #############
 ## Install ##
