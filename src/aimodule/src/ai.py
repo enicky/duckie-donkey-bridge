@@ -11,17 +11,12 @@ import cv2
 from scipy.misc import imresize
 from skimage import color
 
-VERBOSE = True
-
+VERBOSE = False
+SHOW_VIDEO = False
 
 class AiDriver:
     def __init__(self):
-        print("Init of AI Driver")
-        rospy.loginfo('CTOR Donkey Driver')
-        # all_param_names = rospy.get_param_names()
-        # print("all found param names : ", all_param_names)
         vehicle_name = rospy.get_param('/%s/veh' % rospy.get_name())
-        print("vehicle ame : ", vehicle_name)
         subscriber_camera_topic = "/%s/camera_node/image/compressed" % vehicle_name
         publisher_action_topic = "/%s/action" % vehicle_name
 
@@ -39,10 +34,7 @@ class AiDriver:
         self.obs_hi = 255.0
         self.obs_lo = 0.0
 
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        print("device found : ", self.device)
         self.policy = td3.TD3(state_dim, action_dim, max_action, max_turn_angle)
-        print("policy made ... ")
         self.target_reshape_size = (120, 160, 3)
 
         self.max_framestack = 3
@@ -52,17 +44,16 @@ class AiDriver:
         if VERBOSE:
             rospy.loginfo("[%s] Preprocessing image for pytorch stuff" % rospy.get_name())
         ob = self.resize_wrapper(np_arr)
-        print("[%s] resized image : %s" % (rospy.get_name(), ob.shape))
+        resized = ob
         ob = self.grayscale_wrapper(ob)
-        print("[%s] grayscale image : %s" % (rospy.get_name(), ob.shape))
+        grey = ob
         ob = self.normalize_wrapper(ob)
-        print("[%s] normalized image : %s" % (rospy.get_name(), ob.shape))
         ob = self.framestack_wrapper(ob, 3)
 
         ob = self.img_wrapper(ob)
-        print("[%s] img_wrapper image : %s" % (rospy.get_name(), ob.shape))
-
-        return ob
+        if SHOW_VIDEO:
+            return ob, resized, grey
+        return ob, None, None
 
     def on_camera_image(self, ros_data):
         if VERBOSE:
@@ -70,24 +61,26 @@ class AiDriver:
         np_arr = np.fromstring(ros_data.data, np.uint8)
 
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-        processed_image = self.preprocess_image(image_np)
-        # cv2.imshow('cv_img', processed_image)
-
-        # cv2.waitKey(2)
+        processed_image, resized, greimage = self.preprocess_image(image_np)
+        if SHOW_VIDEO:
+            cv2.imshow('cv_img', greimage)
+            cv2.imshow('resized', resized)
+            cv2.waitKey(2)
         action = self.policy.select_action(processed_image)
         cmd = ActionCmd()
         cmd.vel = action[0]
         cmd.angle = action[1]
 
         self.send_action(cmd)
-        print("action : ", action)
+        if VERBOSE:
+            print("action : ", action)
+
 
     def on_shutdown(self):
         rospy.loginfo("[%s] Shutting down." % (rospy.get_name()))
 
     def resize_wrapper(self, observation):
         reresized = imresize(observation, self.target_reshape_size)
-        print("resized : ", reresized.shape)
         return reresized
 
     def grayscale_wrapper(self, observation):
@@ -141,6 +134,7 @@ class LazyFrames(object):
 
 if __name__ == "__main__":
     rospy.init_node('duckie_ai_module', anonymous=False)
+    rospy.Rate(10)
     node = AiDriver()
     rospy.on_shutdown(node.on_shutdown)
     # Keep it spinning to keep the node alive
