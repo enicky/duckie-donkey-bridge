@@ -2,7 +2,7 @@
 # license removed for brevity
 
 import rospy
-from duckietown_msgs.msg import WheelsCmdStamped, BoolStamped, Twist2DStamped
+from duckietown_msgs.msg import WheelsCmdStamped, BoolStamped, Twist2DStamped, ActionCmd
 from sensor_msgs.msg import Joy
 from pca_driver import PCA9685, PWMSteering, PWMThrottle
 import os
@@ -35,15 +35,19 @@ class DonkeyCarDriver:
         self.steering_left_pwm = self.setupParam("~steering_left_pwm", 460)
         self.steering_right_pwm = self.setupParam("~steering_right_pwm", 290)
 
-        self.veh_name = os.environ['VEHICLE_NAME']
+        self.veh_name = rospy.get_param('/%s/veh' % rospy.get_name())
 
         # Setup subscribers
         self.control_constant = 1.0
 
+        self.subscriber_topic_actions = "/%s/action" % self.veh_name
+
         subscriber_topic_name = "/" + str(self.veh_name) + '/joy'
         subscriber_wheel_cmd_name = "/" + str(self.veh_name) + '/wheels_driver_node/wheels_cmd'
 
-        rospy.loginfo('[%s] Subscribing to topic : "%s"' % (self.node_name, subscriber_topic_name))
+        rospy.loginfo('[%s] Subscribing to topic : "%s"' % (self.node_name, self.subscriber_topic_actions))
+
+        self.sub_actions = rospy.Subscriber(self.subscriber_topic_actions, ActionCmd, self.on_action_cmd, queue_size=1)
 
         self.sub_topic = rospy.Subscriber(subscriber_topic_name, Joy, self.on_wheels_cmd)
         self.sub_topic_wheels_cmd = rospy.Subscriber(subscriber_wheel_cmd_name, WheelsCmdStamped, self.on_wheels_cmd_cmd)
@@ -100,6 +104,15 @@ class DonkeyCarDriver:
             rospy.loginfo('Emergency STOP !!!')
             self.throttle_driver.run(0.0)
             return
+
+    def on_action_cmd(self, msg):
+        rospy.loginfo("[%s] Got action cmd %s" %(rospy.get_name(), msg))
+        if self.estop:
+            rospy.loginfo("[%s] EMERGENCY STOP !!! " % rospy.get_name())
+            self.throttle_driver.run(0.0)
+            return
+
+
 
     def on_wheels_cmd_cmd(self, msg):
         print("Processed wheelscmd", msg)

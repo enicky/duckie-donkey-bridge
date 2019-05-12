@@ -3,7 +3,9 @@
 	<node name="joy_cli" pkg="joy_cli" type="joy_cli.py" output="screen">
 		<param name="~veh" value="$(arg veh)"/>
 	</node>-->
-	<arg name="veh" doc="Name of vehicle. ex: duckiebot"/>
+
+
+	<arg name="veh" doc="Name of vehicle. ex: duckiebot" value="$(env DUCKIEBOT_NAME)"/>
 	<node name="joy_cli" pkg="joy_cli" type="motor_donkey.py" output="screen">
 		<param name="~veh" value="$(arg veh)"/>
 	</node>
