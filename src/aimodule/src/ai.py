@@ -16,6 +16,8 @@ SHOW_VIDEO = False
 
 class AiDriver:
     def __init__(self):
+        self.active = False
+
         vehicle_name = rospy.get_param('/%s/veh' % rospy.get_name())
         subscriber_camera_topic = "/%s/camera_node/image/compressed" % vehicle_name
         publisher_action_topic = "/%s/action" % vehicle_name
@@ -60,11 +62,18 @@ class AiDriver:
         return ob, None, None
 
     def on_action_mode_command(self, data):
-        rospy.loginfo("[%s] => received action command on subscription : %s" % (rospy.get_name(), data.data))
+        rospy.loginfo("[%s] => received action command on subscription : %s" % (rospy.get_name(), data.mode))
+        if data.mode == "local":  # full AI experience
+            rospy.loginfo("[%s] => Start complete AI " % rospy.get_name())
+            self.active = True
+        else:
+            self.active = False
 
     def on_camera_image(self, ros_data):
+        if self.active == False:
+            return
         if VERBOSE:
-            rospy.loginfo("[%s] Receieved camera image of type : %s" % (rospy.get_name(), ros_data.format))
+            rospy.loginfo("[%s] Receieved camera image of type : %s %s" % (rospy.get_name(), ros_data.format, self.active))
         np_arr = np.fromstring(ros_data.data, np.uint8)
 
         image_np = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
