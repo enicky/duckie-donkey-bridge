@@ -68,7 +68,7 @@ class DonkeyCarDriver:
                                            max_pulse=self.throttle_forward_pwm,
                                            zero_pulse=self.throttle_stopped_pwm,
                                            min_pulse=self.throttle_reverse_pwm)
-        print("Throttle Driver : ", self.throttle_driver)
+        rospy.loginfo("[%s] Throttle Driver : %s" %( rospy.get_name(), self.throttle_driver))
 
         self.steering_controller = PCA9685(self.steering_channel, address=self.pca9685_i2c_address,
                                            busnum=self.pca9685_i2c_busnum)
@@ -117,6 +117,8 @@ class DonkeyCarDriver:
 
         throttle = self.max_throttle * msg.vel
         steering = self.max_steering * msg.angle
+
+        rospy.loginfo("[%s] Throttle driver : %s" % (rospy.get_name(), self.throttle_driver))
 
         self.throttle_driver.run(throttle)
         self.steering_driver.run(steering)
