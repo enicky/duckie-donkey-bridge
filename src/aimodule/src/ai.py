@@ -4,7 +4,7 @@ from collections import deque
 import rospy
 import torch
 from sensor_msgs.msg import CompressedImage
-from duckietown_msgs.msg import ActionCmd
+from duckietown_msgs.msg import ActionCmd, AiModeSelectionCmd
 import numpy as np
 import td3
 import cv2
@@ -20,10 +20,14 @@ class AiDriver:
         subscriber_camera_topic = "/%s/camera_node/image/compressed" % vehicle_name
         publisher_action_topic = "/%s/action" % vehicle_name
 
+        action_mode_topic = '/%s/ai_mode_selection' % vehicle_name
+
         if VERBOSE:
             rospy.loginfo('[%s] Subscribing to topic "%s"' % (rospy.get_name(), subscriber_camera_topic))
 
         self.sub_topic = rospy.Subscriber(subscriber_camera_topic, CompressedImage, self.on_camera_image, queue_size=1)
+        self.ai_mode_topic = rospy.Subscriber(action_mode_topic, AiModeSelectionCmd, self.on_action_mode_command, queue_size=1)
+
         self.pub_action = rospy.Publisher(publisher_action_topic, ActionCmd, queue_size=1)
 
         state_dim = 3
@@ -54,6 +58,9 @@ class AiDriver:
         if SHOW_VIDEO:
             return ob, resized, grey
         return ob, None, None
+
+    def on_action_mode_command(self, data):
+        rospy.loginfo("[%s] => received action command on subscription : %s" % (rospy.get_name(), data.data))
 
     def on_camera_image(self, ros_data):
         if VERBOSE:

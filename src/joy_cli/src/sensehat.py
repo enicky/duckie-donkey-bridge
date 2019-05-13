@@ -83,7 +83,7 @@ class SenseHatDriver:
 
 
 if __name__ == '__main__':
-    rospy.init_node('senshat_driver', anonymous=False)
+    rospy.init_node('sens', anonymous=False)
     node = SenseHatDriver()
     rospy.on_shutdown(node.on_shutdown)
     # Keep it spinning to keep the node alive

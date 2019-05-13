@@ -10,7 +10,7 @@
 		<param name="~veh" value="$(arg veh)"/>
 	</node>
 
-	<node name="senshat" pkg="joy_cli" type="sensehat.py" output="screen">
+	<node name="/duckie/senshat" pkg="joy_cli" type="sensehat.py" output="screen">
 	    <param name="~veh" value="$(arg veh)" />
 	</node>
 </launch>
