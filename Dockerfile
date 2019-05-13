@@ -16,10 +16,6 @@ RUN git clone https://github.com/RPi-Distro/python-sense-hat /tmp/sense-hat && \
     git clone https://github.com/RPi-Distro/RTIMULib/ /tmp/RTIMU && \
     cd /tmp/RTIMU/Linux/python && ls -la && python setup.py build && python setup.py install
 
-RUN git clone –recursive https://github.com/Azure/azure-iot-sdks.git /tmp/azure && \
-    cd /tmp/azure && \
-    ./setup.sh
-
 RUN mkdir /node-ws 
 
 COPY /src /node-ws/src
@@ -36,7 +32,7 @@ RUN /bin/bash -c "source /node-ws/devel/setup.bash"
 
 RUN /bin/bash -c "chmod +x /node-ws/node_launch.sh"
 
-RUN /bin/bash -c "pip install Adafruit_PCA9685"
+RUN /bin/bash -c "pip install Adafruit_PCA9685 azure-iothub-device-client"
 
 RUN [ "cross-build-end" ]
 
