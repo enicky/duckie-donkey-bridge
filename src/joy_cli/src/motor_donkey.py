@@ -2,7 +2,7 @@
 # license removed for brevity
 
 import rospy
-from duckietown_msgs.msg import WheelsCmdStamped, BoolStamped, Twist2DStamped, ActionCmd
+from duckietown_msgs.msg import WheelsCmdStamped, BoolStamped, Twist2DStamped, ActionCmd, AiModeSelectionCmd
 from sensor_msgs.msg import Joy
 from pca_driver import PCA9685, PWMSteering, PWMThrottle
 import os
@@ -41,13 +41,13 @@ class DonkeyCarDriver:
         self.control_constant = 1.0
 
         self.subscriber_topic_actions = "/%s/action" % self.veh_name
-
-        subscriber_topic_name = "/" + str(self.veh_name) + '/joy'
-        subscriber_wheel_cmd_name = "/" + str(self.veh_name) + '/wheels_driver_node/wheels_cmd'
+        self.subscriber_mode_selection_topic = '/%s/ai_mode_selection' % self.veh_name
 
         rospy.loginfo('[%s] Subscribing to topic : "%s"' % (self.node_name, self.subscriber_topic_actions))
 
         self.sub_actions = rospy.Subscriber(self.subscriber_topic_actions, ActionCmd, self.on_action_cmd, queue_size=1)
+        self.sub_ai_mode_subscriber = rospy.Subscriber(self.subscriber_mode_selection_topic, AiModeSelectionCmd,
+                                                       self.on_ai_mode, queue_size=1)
 
         # self.sub_topic = rospy.Subscriber(subscriber_topic_name, Joy, self.on_wheels_cmd)
         # self.sub_topic_wheels_cmd = rospy.Subscriber(subscriber_wheel_cmd_name, WheelsCmdStamped, self.on_wheels_cmd_cmd)
@@ -115,7 +115,8 @@ class DonkeyCarDriver:
             self.throttle_driver.run(0.0)
             return
 
-
+    def on_ai_mode(self, data):
+        rospy.loginfo("[%s] got ai mode : %s" % (rospy.get_name(), data))
 
     # def on_wheels_cmd_cmd(self, msg):
     #     print("Processed wheelscmd", msg)
