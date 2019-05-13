@@ -387,10 +387,10 @@
     <entry file="file://$PROJECT_DIR$/src/aimodule/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aimodule/package.xml">
+    <entry file="file://$PROJECT_DIR$/src/aimodule/launch/aimodule.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+        <state relative-caret-position="105">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="43" />
         </state>
       </provider>
     </entry>
