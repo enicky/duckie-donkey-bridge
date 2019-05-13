@@ -43,7 +43,7 @@ class PWMSteering:
 
     def run(self, angle):
         # map absolute angle to angle that vehicle can implement.
-        pulse = dk.utils.map_range(angle,
+        pulse = self.map_range(angle,
                                    self.LEFT_ANGLE, self.RIGHT_ANGLE,
                                    self.left_pulse, self.right_pulse)
 
@@ -51,6 +51,18 @@ class PWMSteering:
 
     def shutdown(self):
         self.run(0)  # set steering straight
+
+    def map_range(self, x, X_min, X_max, Y_min, Y_max):
+        """
+        Linear mapping between two ranges of values
+        """
+        X_range = X_max * 1.0 - X_min * 1.0
+        Y_range = Y_max * 1.0 - Y_min * 1.0
+        XY_ratio = X_range / Y_range
+
+        y = ((x - X_min) / XY_ratio + Y_min) // 1
+
+        return int(y)
 
 
 class PWMThrottle:
@@ -79,14 +91,15 @@ class PWMThrottle:
         time.sleep(0.01)
         self.controller.set_pulse(self.zero_pulse)
         time.sleep(1)
+        print("Finished init of ESC")
 
     def run(self, throttle):
         if throttle > 0:
-            pulse = dk.utils.map_range(throttle,
+            pulse = self.map_range(throttle,
                                        0, self.MAX_THROTTLE,
                                        self.zero_pulse, self.max_pulse)
         else:
-            pulse = dk.utils.map_range(throttle,
+            pulse = self.map_range(throttle,
                                        self.MIN_THROTTLE, 0,
                                        self.min_pulse, self.zero_pulse)
 
@@ -94,3 +107,15 @@ class PWMThrottle:
 
     def shutdown(self):
         self.run(0)  # stop vehicle
+
+    def map_range(self, x, X_min, X_max, Y_min, Y_max):
+        """
+        Linear mapping between two ranges of values
+        """
+        X_range = X_max * 1.0 - X_min * 1.0
+        Y_range = Y_max * 1.0 - Y_min * 1.0
+        XY_ratio = X_range / Y_range
+
+        y = ((x - X_min) / XY_ratio + Y_min) // 1
+
+        return int(y)

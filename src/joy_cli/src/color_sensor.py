@@ -3,6 +3,8 @@
 import rospy
 import time
 import RPi.GPIO as GPIO
+from datetime import datetime
+
 
 class ColorSensorDriver:
     def __init__(self):
@@ -35,6 +37,11 @@ class ColorSensorDriver:
         red = self.NUM_CYCLES / duration
 
         print("Found red :  %s " % red)
+        if red > 12000:
+            now = datetime.timestamp()
+            rospy.loginfo("[%s] %s => Found color red: %s" % (rospy.get_name(), str(now), red))
+
+
 
 if __name__ == '__main__':
     rospy.init_node('sens', anonymous=False)

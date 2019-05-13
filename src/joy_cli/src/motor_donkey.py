@@ -35,6 +35,9 @@ class DonkeyCarDriver:
         self.steering_left_pwm = self.setupParam("~steering_left_pwm", 460)
         self.steering_right_pwm = self.setupParam("~steering_right_pwm", 290)
 
+        self.max_throttle = self.setupParam("~max_throttle", 0.5)
+        self.max_steering = self.setupParam("~max_steering", 1.0)
+
         self.veh_name = rospy.get_param('/%s/veh' % rospy.get_name())
 
         # Setup subscribers
@@ -65,6 +68,7 @@ class DonkeyCarDriver:
                                            max_pulse=self.throttle_forward_pwm,
                                            zero_pulse=self.throttle_stopped_pwm,
                                            min_pulse=self.throttle_reverse_pwm)
+        print("Throttle Driver : ", self.throttle_driver)
 
         self.steering_controller = PCA9685(self.steering_channel, address=self.pca9685_i2c_address,
                                            busnum=self.pca9685_i2c_busnum)
@@ -80,12 +84,10 @@ class DonkeyCarDriver:
         return value
 
     def update_params(self, event):
-        self.use_rad_lim = rospy.get_param("~use_rad_lim")
-        self.min_rad = rospy.get_param("~min_rad")
-        self.wheel_distance = rospy.get_param("~wheel_distance")
+        self.max_steering = rospy.get_param("~max_steering")
+        self.max_throttle = rospy.get_param("~max_throttle")
 
     def on_shutdown(self):
-        # self.driver.setWheelsSpeed(left=0.0, right=0.0)
         self.throttle_driver.run(0.0)
         self.steering_driver.run(0.0)
 
@@ -96,6 +98,8 @@ class DonkeyCarDriver:
 
         if self.estop:
             rospy.loginfo("[%s] Emergency Stop Activated")
+            self.steering_driver.run(0.0)
+            self.throttle_driver.run(0.0)
         else:
             rospy.loginfo("[%s] Emergency Stop Released")
 
@@ -110,6 +114,13 @@ class DonkeyCarDriver:
 
     def on_action_cmd(self, msg):
         rospy.loginfo("[%s] Got action cmd %s" %(rospy.get_name(), msg))
+
+        throttle = self.max_throttle * msg.vel
+        steering = self.max_steering * msg.angle
+
+        self.throttle_driver.run(throttle)
+        self.steering_driver.run(steering)
+
         if self.estop:
             rospy.loginfo("[%s] EMERGENCY STOP !!! " % rospy.get_name())
             self.throttle_driver.run(0.0)

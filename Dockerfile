@@ -16,6 +16,10 @@ RUN git clone https://github.com/RPi-Distro/python-sense-hat /tmp/sense-hat && \
     git clone https://github.com/RPi-Distro/RTIMULib/ /tmp/RTIMU && \
     cd /tmp/RTIMU/Linux/python && ls -la && python setup.py build && python setup.py install
 
+RUN git clone –recursive https://github.com/Azure/azure-iot-sdks.git /tmp/azure && \
+    cd /tmp/azure && \
+    ./setup.sh
+
 RUN mkdir /node-ws 
 
 COPY /src /node-ws/src
@@ -23,7 +27,7 @@ COPY .gitignore /node-ws
 COPY .catkin_workspace /node-ws
 COPY node_launch.sh /node-ws
 
-ENV ROS_HOSTNAME localhost
+ENV ROS_HOSTNAME duckie
 
 
 RUN /bin/bash -c "cd /node-ws && source /opt/ros/kinetic/setup.bash && catkin_make -C /node-ws"

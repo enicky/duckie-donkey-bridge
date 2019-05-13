@@ -4,7 +4,8 @@
 		<param name="~veh" value="$(arg veh)"/>
 	</node>-->
 	<arg name="veh" value="$(env DUCKIEBOT_NAME)" doc="Name of vehicle. ex: duckiebot"/>
-	<node name="aimodule" pkg="aimodule" type="ai.py" output="screen">
+
+	<node ns="$(arg veh)" name="aimodule" pkg="aimodule" type="ai.py" output="screen">
 		<param name="~veh" value="$(arg veh)"/>
 	</node>
 
