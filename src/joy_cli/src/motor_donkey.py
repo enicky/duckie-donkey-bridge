@@ -51,12 +51,14 @@ class DonkeyCarDriver:
 
         # self.sub_topic = rospy.Subscriber(subscriber_topic_name, Joy, self.on_wheels_cmd)
         # self.sub_topic_wheels_cmd = rospy.Subscriber(subscriber_wheel_cmd_name, WheelsCmdStamped, self.on_wheels_cmd_cmd)
-        rospy.loginfo("done subscribing ... ")
-        # self.sub_e_stop = rospy.Subscriber("~emergency_stop", BoolStamped, self.on_e_stop, queue_size=1)
+        rospy.loginfo("[%s] Subscribing to emergency stop" % rospy.get_name())
+        self.sub_e_stop = rospy.Subscriber("~emergency_stop", BoolStamped, self.on_e_stop, queue_size=1)
+
+
         # self.sub_wheels_command = rospy.Subscriber('~wheels_cmd', WheelsCmdStamped, self.on_wheels_internal)
+        self.params_update = rospy.Timer(rospy.Duration.from_sec(1.0), self.update_params)
 
-        # self.params_update = rospy.Timer(rospy.Duration.from_sec(1.0), self.update_params)
-
+        rospy.loginfo("[%s] Startup PWM steering + throttle" % rospy.get_name())
         self.throttle_controller = PCA9685(self.throttle_channel, address=self.pca9685_i2c_address,
                                            busnum=self.pca9685_i2c_busnum)
         self.throttle_driver = PWMThrottle(controller=self.throttle_controller,
@@ -77,10 +79,10 @@ class DonkeyCarDriver:
 
         return value
 
-    # def update_params(self, event):
-    #     self.use_rad_lim = rospy.get_param("~use_rad_lim")
-    #     self.min_rad = rospy.get_param("~min_rad")
-    #     self.wheel_distance = rospy.get_param("~wheel_distance")
+    def update_params(self, event):
+        self.use_rad_lim = rospy.get_param("~use_rad_lim")
+        self.min_rad = rospy.get_param("~min_rad")
+        self.wheel_distance = rospy.get_param("~wheel_distance")
 
     def on_shutdown(self):
         # self.driver.setWheelsSpeed(left=0.0, right=0.0)

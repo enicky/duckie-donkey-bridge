@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="66585526-d919-4da6-9ff4-9bbedf7a8d9c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/node_launch.sh" beforeDir="false" afterPath="$PROJECT_DIR$/node_launch.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/aimodule/src/ai.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/aimodule/src/ai.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/duckietown_msgs/msg/AiModeSelectionCmd.msg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/joy_cli/src/sensehat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch" beforeDir="false" afterPath="$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,25 +19,82 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/aimodule/src/ai.py">
+        <entry file="file://$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1859">
-              <caret line="136" column="11" selection-start-line="136" selection-start-column="11" selection-end-line="136" selection-end-column="11" />
+            <state relative-caret-position="-811">
+              <caret line="37" column="69" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="69" />
               <folding>
-                <element signature="e#22#51#0" expanded="true" />
+                <element signature="e#53#65#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py">
+        <entry file="file://$PROJECT_DIR$/src/joy_cli/src/sensehat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="70" column="73" selection-start-line="70" selection-start-column="73" selection-end-line="70" selection-end-column="73" />
+            <state relative-caret-position="240">
+              <caret line="61" column="36" lean-forward="true" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
               <folding>
-                <element signature="e#53#65#0" expanded="true" />
+                <element signature="e#23#82#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/AiModeSelectionCmd.msg">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/joy_cli/src/joy_cli.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret selection-end-column="21" />
+              <folding>
+                <element signature="e#52#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/node_launch.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -62,6 +123,8 @@
       <find>got wheels</find>
       <find>on_wheels_cmd</find>
       <find>setup</find>
+      <find>on_e_stop</find>
+      <find>publisher</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -79,18 +142,20 @@
         <option value="$PROJECT_DIR$/src/test_joy/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/test_joy/package.xml" />
         <option value="$PROJECT_DIR$/src/test_joy/src/test_joy.py" />
-        <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/src/aimodule/package.xml" />
         <option value="$PROJECT_DIR$/src/aimodule/launch/aimodule.launch" />
         <option value="$PROJECT_DIR$/src/aimodule/src/td3.py" />
         <option value="$PROJECT_DIR$/src/duckietown_msgs/package.xml" />
         <option value="$PROJECT_DIR$/src/duckietown_msgs/msg/ActionCmd.msg" />
-        <option value="$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch" />
-        <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/node_launch.sh" />
         <option value="$PROJECT_DIR$/src/aimodule/src/ai.py" />
         <option value="$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py" />
+        <option value="$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/duckietown_msgs/msg/AiModeSelectionCmd.msg" />
+        <option value="$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch" />
+        <option value="$PROJECT_DIR$/build.sh" />
+        <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/src/joy_cli/src/sensehat.py" />
       </list>
     </option>
   </component>
@@ -131,15 +196,7 @@
               <item name="duckie-donkey-bridge" type="b2602c69:ProjectViewProjectNode" />
               <item name="duckie-donkey-bridge" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="aimodule" type="462c0819:PsiDirectoryNode" />
-              <item name="launch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="duckie-donkey-bridge" type="b2602c69:ProjectViewProjectNode" />
-              <item name="duckie-donkey-bridge" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="aimodule" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="duckietown_msgs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="duckie-donkey-bridge" type="b2602c69:ProjectViewProjectNode" />
@@ -337,9 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/BoolStamped.msg">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/IntersectionPose.msg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -357,32 +411,11 @@
     <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/WheelsCmdStamped.msg">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/ActionCmd.msg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/.autogenerated.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor />
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/package.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="4" column="99" selection-start-line="4" selection-start-column="99" selection-end-line="4" selection-end-column="99" />
         </state>
       </provider>
     </entry>
@@ -417,38 +450,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/joy_cli/src/joy_cli.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="21" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/BoolStamped.msg">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="46" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Dockerfile">
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/ActionCmd.msg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="16" />
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch">
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/package.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
-          <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_launch.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <caret line="4" column="99" selection-start-line="4" selection-start-column="99" selection-end-line="4" selection-end-column="99" />
         </state>
       </provider>
     </entry>
@@ -462,12 +484,85 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/CoordinationClearanceETHZ17.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/AprilTagDetectionArray.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/KinematicsParameters.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/DuckieSensor.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/CoordinationClearance.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/AprilTagDetection.msg">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/joy_cli/src/motor_donkey.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="70" column="73" selection-start-line="70" selection-start-column="73" selection-end-line="70" selection-end-column="73" />
+        <state relative-caret-position="-811">
+          <caret line="37" column="69" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="69" />
           <folding>
             <element signature="e#53#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/joy_cli/launch/joy_cli.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="45" selection-start-line="13" selection-start-column="45" selection-end-line="13" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/joy_cli/src/joy_cli.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="21" />
+          <folding>
+            <element signature="e#52#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_launch.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="11" lean-forward="true" selection-start-column="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="16" column="55" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/duckietown_msgs/msg/AiModeSelectionCmd.msg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/joy_cli/src/sensehat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="61" column="36" lean-forward="true" selection-start-line="61" selection-start-column="36" selection-end-line="61" selection-end-column="36" />
+          <folding>
+            <element signature="e#23#82#0" expanded="true" />
           </folding>
         </state>
       </provider>
