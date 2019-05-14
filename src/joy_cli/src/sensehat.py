@@ -5,6 +5,8 @@ from duckietown_msgs.msg import AiModeSelectionCmd
 import rospy
 
 red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
 
 class SenseHatDriver:
     def __init__(self):
@@ -53,23 +55,37 @@ class SenseHatDriver:
 
             self.current_mode = self.target_mode
             self.current_led_status = self.target_led_status
+            color = red
+            if self.current_led_status == 2:
+                color = green
+            elif self.current_led_status == 3:
+                color = blue
+            else:
+                color = red
+
+
             self.publish_ai_mode(self.current_led_status, self.current_mode)
             rospy.loginfo("[%s] published ai mode : %s %s" % (rospy.get_name(), str(self.current_led_status), str(self.current_mode)))
             self.sense.show_message("Mode %s" % str(self.current_mode), text_colour=red)
             self.sense.clear()
+            self.sense.set_pixel(0, 0, color)
             # test
 
     def direction_down(self, event):
         if event.action != ACTION_RELEASED:
+            color = red
             if self.target_mode == 'user':
                 self.target_mode = 'local_angle'
                 self.target_led_status = 2
+                color = green
             elif self.target_mode == 'local_angle':
                 self.target_mode = 'local'
                 self.target_led_status = 3
+                color = blue
             else:
                 self.target_mode = 'user'
                 self.target_led_status = 1
+                color = red
 
             rospy.loginfo("[%s] Target Mode : '%s', target led status : '%s'" % (rospy.get_name(), self.target_mode, str(self.target_led_status)))
 
