@@ -131,17 +131,6 @@ class DonkeyCarDriver:
     def on_ai_mode(self, data):
         rospy.loginfo("[%s] got ai mode : %s" % (rospy.get_name(), data))
 
-    # def on_wheels_cmd_cmd(self, msg):
-    #     print("Processed wheelscmd", msg)
-
-    # def on_wheels_internal(self, msg):
-    #     rospy.loginfo('got wheels internal message : ')
-    #     print("got wheelsy ... ", msg)
-
-    # def on_car_cmd(self, msg):
-    #     rospy.loginfo("got car cmd messge")
-    #     print("got car cmd message : ", msg)
-
 
 if __name__ == '__main__':
     rospy.init_node('donkey_car_driver', anonymous=False)
