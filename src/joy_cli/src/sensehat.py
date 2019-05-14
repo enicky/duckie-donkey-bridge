@@ -63,7 +63,6 @@ class SenseHatDriver:
             else:
                 color = red
 
-
             self.publish_ai_mode(self.current_led_status, self.current_mode)
             rospy.loginfo("[%s] published ai mode : %s %s" % (rospy.get_name(), str(self.current_led_status), str(self.current_mode)))
             self.sense.show_message("Mode %s" % str(self.current_mode), text_colour=red)
