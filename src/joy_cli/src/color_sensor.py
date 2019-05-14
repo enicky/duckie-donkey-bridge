@@ -13,7 +13,8 @@ PROTOCOL = IoTHubTransportProvider.MQTT
 # String containing Hostname, Device Id & Device Key in the format:
 # "HostName=<host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
 CONNECTION_STRING = "[Device Connection String]"
-
+CAR_NAME = "AI"
+DATA_STRING = '{"car_name":"%"%, '
 
 class ColorSensorDriver:
     def __init__(self):
