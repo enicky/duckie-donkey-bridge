@@ -117,8 +117,8 @@ class DonkeyCarDriver:
 
         throttle = self.max_throttle * msg.vel
         steering = self.max_steering * msg.angle
+        rospy.loginfo("[%s] Throttle, steering : %s %s" % (rospy.get_name(), throttle, steering))
 
-        rospy.loginfo("[%s] Throttle driver : %s" % (rospy.get_name(), self.throttle_driver))
 
         self.throttle_driver.run(throttle)
         self.steering_driver.run(steering)
