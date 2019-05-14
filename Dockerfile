@@ -16,6 +16,15 @@ RUN git clone https://github.com/RPi-Distro/python-sense-hat /tmp/sense-hat && \
     git clone https://github.com/RPi-Distro/RTIMULib/ /tmp/RTIMU && \
     cd /tmp/RTIMU/Linux/python && ls -la && python setup.py build && python setup.py install
 
+RUN cd /tmp && \
+    wget https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.tar.gz && \
+    tar vxzf boost_1_70_0.tar.gz && \
+    cd boost_1_70_0 && \
+    ./bootstrap.sh && \
+    ./b2 install && \
+    ldconfig && \
+    cd / && rm -rf /tmp/boost*
+
 RUN mkdir /node-ws 
 
 COPY /src /node-ws/src
@@ -32,7 +41,7 @@ RUN /bin/bash -c "source /node-ws/devel/setup.bash"
 
 RUN /bin/bash -c "chmod +x /node-ws/node_launch.sh"
 
-RUN /bin/bash -c "pip install Adafruit_PCA9685 azure-iothub-device-client"
+RUN /bin/bash -c "pip install Adafruit_PCA9685 azure-iothub-device-client RPi.GPIO"
 
 RUN [ "cross-build-end" ]
 

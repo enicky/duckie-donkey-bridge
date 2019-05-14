@@ -15,6 +15,6 @@
 	</node>
 
 	<node ns="$(arg veh)" name="colorsensor" pkg="joy_cli" type="color_sensor.py" output="screen">
-        <param name="~veh" value="$(arg vah)" />
+        <param name="~veh" value="$(arg veh)" />
     </node>
 </launch>

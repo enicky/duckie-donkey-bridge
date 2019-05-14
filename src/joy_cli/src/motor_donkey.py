@@ -45,13 +45,14 @@ class DonkeyCarDriver:
 
         self.subscriber_topic_actions = "/%s/action" % self.veh_name
         self.subscriber_mode_selection_topic = '/%s/ai_mode_selection' % self.veh_name
+        self.joystick_topic = '/%s/joy' % self.veh_name
 
         rospy.loginfo('[%s] Subscribing to topic : "%s"' % (self.node_name, self.subscriber_topic_actions))
 
         self.sub_actions = rospy.Subscriber(self.subscriber_topic_actions, ActionCmd, self.on_action_cmd, queue_size=1)
         self.sub_ai_mode_subscriber = rospy.Subscriber(self.subscriber_mode_selection_topic, AiModeSelectionCmd,
                                                        self.on_ai_mode, queue_size=1)
-
+        self.sub_joy_button = rospy.Subscriber(self.joystick_topic, Joy,self.on_joystick_cmd, queue_size=1)
         # self.sub_topic = rospy.Subscriber(subscriber_topic_name, Joy, self.on_wheels_cmd)
         # self.sub_topic_wheels_cmd = rospy.Subscriber(subscriber_wheel_cmd_name, WheelsCmdStamped, self.on_wheels_cmd_cmd)
         rospy.loginfo("[%s] Subscribing to emergency stop" % rospy.get_name())
@@ -75,6 +76,8 @@ class DonkeyCarDriver:
         self.steering_driver = PWMSteering(self.steering_controller, left_pulse=self.steering_left_pwm,
                                            right_pulse=self.steering_right_pwm)
         rospy.loginfo("[%s] finished configuring pwm " % rospy.get_name())
+
+        self.previous_e_button_state = 0
 
     def setupParam(self, param_name, default_value):
         value = rospy.get_param(param_name, default_value)
@@ -103,14 +106,21 @@ class DonkeyCarDriver:
         else:
             rospy.loginfo("[%s] Emergency Stop Released")
 
-    # def on_wheels_cmd(self, msg):
-    #     rospy.loginfo('got wheels_cmd')
-    #     print("got wheelscmd : ", msg)
-    #
-    #     if self.estop:
-    #         rospy.loginfo('Emergency STOP !!!')
-    #         self.throttle_driver.run(0.0)
-    #         return
+    def on_joystick_cmd(self, data):
+        buttons = data.buttons
+
+        if buttons[0] != self.previous_e_button_state:
+            # button state switch
+            if buttons[1] == 1:
+                # Emergency Brakeè!
+                rospy.logInfo("[%s] E-BRAKE !!" % rospy.get_name())
+                self.steering_driver.run(0.0)
+                self.throttle_driver.run(0.0)
+                self.estop = True
+            else:
+                rospy.loginfo("[%s] E-Brake released!!" % rospy.get_name())
+                self.estop = False
+            self.previous_e_button_state = buttons[0]
 
     def on_action_cmd(self, msg):
         rospy.loginfo("[%s] Got action cmd %s" %(rospy.get_name(), msg))
@@ -119,14 +129,12 @@ class DonkeyCarDriver:
         steering = self.max_steering * msg.angle
         rospy.loginfo("[%s] Throttle, steering : %s %s" % (rospy.get_name(), throttle, steering))
 
-
-        self.throttle_driver.run(throttle)
-        self.steering_driver.run(steering)
-
         if self.estop:
             rospy.loginfo("[%s] EMERGENCY STOP !!! " % rospy.get_name())
-            self.throttle_driver.run(0.0)
             return
+        else:
+            self.throttle_driver.run(throttle)
+            self.steering_driver.run(steering)
 
     def on_ai_mode(self, data):
         rospy.loginfo("[%s] got ai mode : %s" % (rospy.get_name(), data))
